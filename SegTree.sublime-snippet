@@ -1,0 +1,123 @@
+<snippet>
+	<content><![CDATA[
+class SegTree
+{
+public:
+	struct node
+	{
+		int val;
+		node(int x=0)
+		{
+			val=x;
+		}
+	};
+	const node REJECT_NODE = node(INT_MIN);
+	int n;
+	vector<node> seg;
+	vector<int> lazy,a;
+	node merge(node x, node y)
+	{
+		node ans = node(max(x.val, y.val));
+		return ans;
+	}
+
+	void apply(int pos, int val)
+	{
+		seg[pos].val += val;
+		lazy[pos] += val;
+	}
+
+	void pull(int pos)
+	{
+		seg[pos] = merge(seg[2 * pos], seg[2 * pos + 1]);
+	}
+
+	void push(int pos)
+	{
+		if(lazy[pos] != 0)
+		{
+			apply(2 * pos, lazy[pos]);
+			apply(2 * pos + 1, lazy[pos]);
+			lazy[pos] = 0;
+		}
+	}
+
+	void build(int cur, int st, int en)
+	{
+		if(st == en)
+		{
+			seg[cur] = node(a[st]);
+			return;
+		}
+		int mid = (st + en) >> 1;
+		build(2 * cur, st, mid);
+		build(2 * cur + 1, mid+1, en);
+		pull(cur);
+	}
+
+	SegTree(int n_val, vector<int> &arr)
+	{
+		n = n_val;
+		seg.resize(4 * n + 5, 0);
+		lazy.resize(4 * n + 5, 0);
+		a = arr;
+		build(1, 1, n);
+	}
+
+	void add(int cur, int st, int en, int ql, int qr, int val)
+	{
+		if(en < ql or qr < st)
+			return;
+		else if(ql <= st and en <= qr)
+		{
+			apply(cur, val);
+			return;
+		}
+		else
+		{
+			push(cur);
+			int mid = (st + en) >> 1;
+			add(2 * cur, st, mid, ql ,qr, val);
+			add(2 * cur + 1, mid + 1, en, ql ,qr, val);
+			pull(cur);
+		}
+	}
+
+	void update(int pos, int val)
+	{
+		add(1, 1, n, pos, pos, val);
+	}
+
+	void update(int l, int r, int val)
+	{
+		add(1, 1, n, l, r, val);
+	}
+
+	node query(int cur, int st, int en, int ql, int qr)
+	{
+		if(en < ql or qr < st)
+			return REJECT_NODE;
+		else if(ql <= st and en <= qr)
+			return seg[cur];
+		else
+		{
+			push(cur);
+			int mid = (st + en) >> 1;
+			node node_l = query(2 * cur, st, mid, ql, qr);
+			node node_r = query(2 * cur + 1, mid + 1, en, ql, qr);
+			return merge(node_l, node_r);
+		}
+	}
+
+	int get(int l, int r)
+	{
+		node ans = query(1, 1, n, l, r);
+		return ans.val;
+	}
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>segmenttree</tabTrigger> 
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

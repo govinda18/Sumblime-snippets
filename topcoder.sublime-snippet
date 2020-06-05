@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+#include<bits/stdc++.h>
+#define ll          long long
+#define pb          push_back
+#define	endl		'\n'
+#define pii         pair<ll int,ll int>
+#define vi          vector<ll int>
+#define all(a)      (a).begin(),(a).end()
+#define F           first
+#define S           second
+#define sz(x)       (ll int)x.size()
+#define hell        1000000007
+#define rep(i,a,b)	for(ll int i=a;i<b;i++)
+using namespace std;
+
+#define N  100005
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	 <tabTrigger>tocoder</tabTrigger> 
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

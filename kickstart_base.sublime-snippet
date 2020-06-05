@@ -1,0 +1,48 @@
+<snippet>
+	<content><![CDATA[
+#include<bits/stdc++.h>
+#define ll 			long long
+#define pb          push_back
+#define	endl		'\n'
+#define pii         pair<int,int>
+#define vi          vector<int>
+#define all(a)      (a).begin(),(a).end()
+#define F           first
+#define S           second
+#define sz(x)       (int)x.size()
+#define hell        1000000007
+#define rep(i,a,b)	for(int i=a;i<b;i++)
+#define dep(i,a,b)	for(int i=a;i>=b;i--)
+#define lbnd        lower_bound
+#define ubnd        upper_bound
+#define bs          binary_search
+#define mp          make_pair
+using namespace std;
+
+#define N  ${1:100005}
+
+void solve(int TEST)
+{
+	cout<<"Case #"<<TEST<<": ";
+	${2:}
+}
+
+signed main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
+	int TESTS=1;
+	cin>>TESTS;
+	for(int i=1;i<=TESTS;i++)
+	{
+		solve(i);
+	}
+	return 0;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>kickstart</tabTrigger> 
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

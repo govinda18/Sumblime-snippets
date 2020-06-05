@@ -1,0 +1,108 @@
+<snippet>
+	<content><![CDATA[
+class Matrix
+{
+	public:
+		ll n;
+		vector<vi> val;
+		Matrix(ll n=2);
+		Matrix operator+(const Matrix&) const;
+		Matrix operator-(const Matrix&) const;
+		Matrix operator*(const Matrix&) const;
+		Matrix& operator=(const Matrix& b)
+	    {
+	        if(this!=&b)
+	        {
+	            val = b.val;
+	            n = b.n;
+	        }
+	        return *this;
+	    } 
+		void set(ll x)
+		{
+			rep(i,0,n)
+			rep(j,0,n)
+			val[i][j]=x;
+		}
+		void print()
+		{
+			rep(i,0,n)
+			{
+				rep(j,0,n)
+					cout<<val[i][j]<<" ";
+				cout<<endl;
+			}
+		}
+};
+
+Matrix::Matrix(ll x)
+{
+	n=x;
+	val.resize(x);
+	rep(i,0,x)
+	val[i].resize(x);
+}
+
+Matrix Matrix::operator+ (const Matrix& b) const
+{
+	class Matrix ans;
+	assert(this->n==b.n);
+	rep(i,0,b.n)
+		rep(j,0,b.n)
+			ans.val[i][j]=this->val[i][j]+b.val[i][j];
+	return ans;
+}
+
+Matrix Matrix::operator- (const Matrix& b) const
+{
+	class Matrix ans;
+	assert(this->n==b.n);
+	rep(i,0,b.n)
+		rep(j,0,b.n)
+			ans.val[i][j]=this->val[i][j]-b.val[i][j];
+	return ans;
+}
+
+
+Matrix Matrix::operator* (const Matrix& b) const
+{
+	class Matrix r;
+	assert(this->n==b.n);
+	for(ll i=0;i<this->n;i++)
+		for(ll j=0;j<this->n;j++)
+		{
+			ll res=0;
+			for(ll k=0;k<b.n;k++)
+				res += this->val[i][k]*b.val[k][j];
+			if(hell)
+				res%=hell;
+			r.val[i][j] = res;
+		}
+	return r;			
+}
+
+
+class Matrix matpow(class Matrix a, ll n)
+{
+	if(n==0)
+	{
+		Matrix ans(2);
+		ans.set(0);
+		ans.val[0][0]=1;
+		ans.val[1][1]=1;
+		return ans;
+	}
+	if(n==1)
+		return a;
+	class Matrix x = matpow(a,n/2);
+	class Matrix r = x*x;
+	if(n%2==1)
+		r=r*a;
+	return r;			
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>matclass</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

@@ -1,0 +1,16 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Agila Theme",
+		"CSV Record View",
+		"Jedi - Python autocompletion",
+		"MatlabFilenameAutoComplete",
+		"Package Control",
+		"SideBarEnhancements",
+		"Theme - Brogrammer"
+	]
+}

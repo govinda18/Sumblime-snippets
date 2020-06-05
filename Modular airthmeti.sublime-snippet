@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+ll add(ll x,ll y,ll mod) { x += y; if(x >= mod) x -= mod; return x;}
+ll sub(ll x,ll y,ll mod) { x -= y; if(x < 0) x += mod; return x;}
+ll mul(ll x,ll y,ll mod) { return (x * 1ll * y) % mod;}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>mod operations</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

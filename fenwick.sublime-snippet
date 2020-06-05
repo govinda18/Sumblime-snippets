@@ -1,0 +1,45 @@
+<snippet>
+	<content><![CDATA[
+class FenwickTree
+{
+public:
+    vector<int> bit;
+    int n;
+
+    FenwickTree(int _n)
+    {
+        n = _n;
+        bit.resize(n + 1, 0);
+    }
+
+    FenwickTree(vector<int> &arr) : FenwickTree(arr.size())
+    {
+        for(int i = 1; i <= arr.size(); i++)
+            add(i, arr[i]);
+    }
+
+    int query(int r)
+    {
+        int res = 0;
+        for(; r > 0; r = (r & (r + 1)) - 1)
+            res += bit[r];
+        return res;
+    }
+
+    int query(int l, int r)
+    {
+        return query(r) - query(l - 1);
+    }
+
+    void add(int idx, int delta)
+    {
+        for(; idx <= n; idx |= idx + 1)
+            bit[idx] += delta;
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>fenwick</tabTrigger> 
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

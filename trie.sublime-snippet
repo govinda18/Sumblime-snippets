@@ -1,0 +1,51 @@
+<snippet>
+	<content><![CDATA[
+class Trie
+{
+    struct Node
+    {
+        int sons[2];
+        int cnt = 0;
+    };
+    vector<Node> nodes;
+    int lastid = 0;
+public:
+    Trie()
+    {
+        nodes.resize(N);
+    }
+    void add(int x, int val)
+    {
+        int id = 0;
+        for(int i = 30; i >= 0; i--)
+        {
+            nodes[id].cnt+=val;
+            bool bit = (x & (1 << i)) > 0;
+            if(!nodes[id].sons[bit])
+                nodes[id].sons[bit] = ++lastid;
+            id = nodes[id].sons[bit];
+        }
+        nodes[id].cnt+=val;
+    }
+    int getMax(int x)
+    {
+        int id = 0;
+        int ans = 0;
+        for(int i = 30; i >= 0; i--)
+        {
+            bool bit = (x & (1 << i)) > 0;
+            bit ^= true;
+            if(nodes[id].sons[bit] && nodes[nodes[id].sons[bit]].cnt)
+                ans += (1 << i), id = nodes[id].sons[bit];
+            else
+                id = nodes[id].sons[bit ^ true];
+        }
+        return ans;
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>trie</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
